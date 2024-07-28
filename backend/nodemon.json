@@ -1,0 +1,8 @@
+{
+  "env": {
+    "NODE_ENV": "PRODUCTION",
+    "MONGO_USER": "mohamedsmenshawy",
+    "MONGO_PASSWORD": "Saeed!205505",
+    "MONGO_DEFAULT_DATABASE": "mean-app"
+  }
+}
