@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 
 const date = new Date();
 
-const generateAccessToken = async (student) => {
+const generateAccessToken = async (user) => {
   const accessToken = jwt.sign(
-    { email: student.email, studentId: student.student_id },
+    { email: user.email, userId: user._id },
     "MY_ACCESS_SECRET_TOKEN_GENERATED",
     { expiresIn: "3d" }
   );
@@ -12,9 +12,9 @@ const generateAccessToken = async (student) => {
   return { token: accessToken , expiresIn };
 };
 
-const generateRefreshToken = async (student) => {
+const generateRefreshToken = async (user) => {
   const refreshToken = jwt.sign(
-    { email: student.email, studentId: student.student_id },
+    { email: user.email, userId: user._id },
     "MY_REFRESH_SECRET_TOKEN_GENERATED",
     { expiresIn: "30d" }
   );

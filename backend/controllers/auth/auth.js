@@ -14,6 +14,7 @@ exports.signup = async (req, res, next) => {
       password: hashedPassword,
     });
     const result = await user.save();
+
     res.status(201).json({
       message: "User created!",
       userId: result._id,
@@ -21,6 +22,7 @@ exports.signup = async (req, res, next) => {
 
   } catch (err) {
     if (!err.statusCode) {
+      err.message = "Invalid authentication credentials";
       err.statusCode = 500;
     }
     next(err);
@@ -49,10 +51,12 @@ exports.login = async (req, res, next) => {
     res.status(200).json({
       accessToken,
       expiresIn:3600,
+      userId: user._id.toString(),
     });
 
   }catch (err) {
     if (!err.statusCode) {
+      err.message = "Invalid authentication credentials";
       err.statusCode = 500;
     }
     next(err);

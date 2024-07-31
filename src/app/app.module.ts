@@ -23,7 +23,10 @@ import {NgOptimizedImage} from "@angular/common";
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import {MatMenu, MatMenuModule} from "@angular/material/menu";
-import {AuthInterceptor} from "./auth/auth-interceptor";
+import {AuthInterceptor} from "./auth/auth.interceptor";
+import {MatDialogModule} from '@angular/material/dialog';
+import {ErrorInterceptor} from "./error.interceptor";
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import {AuthInterceptor} from "./auth/auth-interceptor";
     HeaderComponent,
     PostsListComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,7 @@ import {AuthInterceptor} from "./auth/auth-interceptor";
     MatMenu,
     MatMenuModule,
     MatPaginatorModule,
+    MatDialogModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgOptimizedImage
@@ -59,8 +64,14 @@ import {AuthInterceptor} from "./auth/auth-interceptor";
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
+    } ,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // entryComponents: [ErrorComponent]
 })
 export class AppModule { }

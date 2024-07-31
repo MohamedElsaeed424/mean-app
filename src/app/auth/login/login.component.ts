@@ -13,6 +13,11 @@ export class LoginComponent implements OnInit {
   constructor(private authService : AuthService) {}
 
   ngOnInit() {
+    this.authService.getAuthStatusListener().subscribe(
+      authStatus => {
+        this.isLoading = false;
+      }
+    );
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])

@@ -5,6 +5,7 @@ import {PostsService} from "../posts.service";
 import {ActivatedRoute} from "@angular/router";
 import {Router} from "@angular/router";
 import {mimeType} from './mime-type.validator'
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-post-create',
@@ -23,9 +24,13 @@ export class PostCreateComponent implements OnInit {
   constructor(
     private postService: PostsService ,
     private route : ActivatedRoute,
+    private authService : AuthService,
     private router : Router) {}
 
   ngOnInit() {
+    this.authService.getAuthStatusListener().subscribe(isAuthenticated => {
+      this.isLoading = false;
+    })
     this.route.paramMap.subscribe(paramMap => {
       if(paramMap.has('postId')) {
         this.mode = 'edit';
@@ -37,7 +42,8 @@ export class PostCreateComponent implements OnInit {
             id: postData.id,
             title: postData.title,
             content: postData.content ,
-            imagePath: postData.imagePath
+            imagePath: postData.imagePath ,
+            creator: postData.creator
           };
           this.AddPostForm.setValue({
             title: this.post?.title,

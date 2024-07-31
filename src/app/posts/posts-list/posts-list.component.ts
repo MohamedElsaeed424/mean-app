@@ -13,6 +13,7 @@ import {AuthService} from "../../auth/auth.service";
 export class PostsListComponent implements OnInit  , OnDestroy{
   @Input() posts: Post[] = [];
   private newPostSubscription : Subscription ;
+  userId:string;
   isLoading = false;
   length = 0;
   pageSize = 2;
@@ -23,6 +24,7 @@ export class PostsListComponent implements OnInit  , OnDestroy{
   ngOnInit() {
     this.isLoading = true;
     this.postService.getPosts(this.pageSize, 1);
+    this.userId = this.authService.getUserId();
     this.newPostSubscription = this.postService.getPostUpdateListener().subscribe(
       (postData: {posts: Post[], postCount: number}) => {
         this.isLoading = false;
@@ -37,6 +39,9 @@ export class PostsListComponent implements OnInit  , OnDestroy{
     this.postService.deletePost(postId).subscribe(
       () => {
         this.postService.getPosts(this.pageSize, 1);
+      },
+      () => {
+        this.isLoading = false;
       }
     );
   }

@@ -17,10 +17,11 @@ module.exports = async (req, res, next) => {
       return res.status(401).json({ message: "Not Authenticated" });
     }
     req.accessToken = token;
-    req.student_id = decodedToken.studentId;
+    req.userId = decodedToken.userId;
     next();
   } catch (err) {
     if (!err.statusCode) {
+      err.message = "Login First";
       err.statusCode = 500;
     }
     next(err);

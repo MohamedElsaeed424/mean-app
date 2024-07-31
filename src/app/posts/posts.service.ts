@@ -5,13 +5,14 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 import {environment} from "../../environments/environment";
+import {AuthService} from "../auth/auth.service";
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
   private posts: Post[] = [];
   private postsUpdated = new Subject<{posts:Post[],postCount:number}>();
 
-  constructor(private http: HttpClient , private router : Router) {}
+  constructor(private http: HttpClient , private router : Router , private authService :AuthService) {}
 
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
@@ -27,7 +28,8 @@ export class PostsService {
             title: post.title,
             content: post.content,
             id: post._id,
-            imagePath: post.imagePath
+            imagePath: post.imagePath ,
+            creator: post.creator
           };
         }) ,
           maxPosts: postData.maxPosts
@@ -49,7 +51,8 @@ export class PostsService {
           title: postData.post.title,
           content: postData.post.content,
           id: postData.post._id ,
-          imagePath: postData.post.imagePath
+          imagePath: postData.post.imagePath ,
+          creator: postData.post.creator
         };
       })
     );
@@ -64,7 +67,7 @@ export class PostsService {
       post.append('content', content);
       post.append('image', image, title);
     } else {
-      post = {id: id, title: title, content: content, imagePath: image};
+      post = {id: id, title: title, content: content, imagePath: image , creator: null};
     }
     this.http.put<{message: string}>(
       `${environment.apiUrl}/posts/update-post/` + id,
