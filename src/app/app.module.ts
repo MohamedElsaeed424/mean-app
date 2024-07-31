@@ -18,15 +18,21 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PostsListComponent } from './posts/posts-list/posts-list.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {NgOptimizedImage} from "@angular/common";
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import {MatMenu, MatMenuModule} from "@angular/material/menu";
+import {AuthInterceptor} from "./auth/auth-interceptor";
 
 @NgModule({
   declarations: [
     AppComponent,
     PostCreateComponent,
     HeaderComponent,
-    PostsListComponent
+    PostsListComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,8 @@ import {NgOptimizedImage} from "@angular/common";
     MatIconModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
+    MatMenu,
+    MatMenuModule,
     MatPaginatorModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -47,6 +55,11 @@ import {NgOptimizedImage} from "@angular/common";
   ],
   providers: [
     provideAnimationsAsync() ,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

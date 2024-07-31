@@ -3,4 +3,61 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  display: flex;
 }
+
+/* Ensure the toolbar has flexbox layout */
+mat-toolbar {
+  display: flex;
+  justify-content: space-between; /* Space between title and header items */
+  align-items: center; /* Center items vertically */
+}
+
+/* Title styling */
+.toolbar-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e64a19; /* Change color based on toolbar background */
+  cursor: pointer;
+}
+
+/* Header items alignment */
+.header-items {
+  display: flex;
+  align-items: center; /* Vertically align items */
+  flex: 1; /* Take up remaining space */
+}
+
+/* Style the 'User' section to push it to the right */
+.user-menu {
+  margin-left: auto; /* Push this section to the far right */
+}
+
+/* Styling for links and buttons */
+a.mat-button {
+  margin: 0 8px; /* Adjust spacing between items */
+  color: #fff; /* Change color based on toolbar background */
+}
+
+/* Style active links */
+a.mat-button.mat-accent {
+  font-weight: bold;
+  color: #ff5722; /* Highlight color */
+}
+a:hover {
+  color: #ff5722; /* Highlight color on hover */
+}
+/* Menu button styling */
+button[mat-menu-trigger] {
+  margin: 0 8px; /* Adjust spacing */
+}
+button:hover {
+  color: #ff5722; /* Highlight color on hover */
+}
+
+/* Menu items styling */
+mat-menu-item {
+  color: #333; /* Change color as needed */
+}
+
+

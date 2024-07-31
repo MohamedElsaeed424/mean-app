@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const imagesLoader = require("./util/image-loader");
 
 const postsRoutes = require('./routes/posts/posts');
+const authRoutes = require('./routes/auth/auth');
 
 const app = express();
 
@@ -44,6 +45,19 @@ app.use((req, res, next) => {
 });
 
 app.use("/posts",postsRoutes);
+app.use("/auth",authRoutes);
+
+
+app.use((error, req, res, next) => {
+  console.log("Error: ",error);
+  const status = error.statusCode || 500;
+  const message = error.message;
+  const data = error.data;
+  res.status(status).json({
+    message: message,
+    data: data,
+  });
+});
 
 
 

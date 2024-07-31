@@ -3,6 +3,7 @@ const { body } = require("express-validator");
 const router = express.Router();
 const postsController = require("../../controllers/posts/posts");
 const multer = require("multer");
+const isAuth = require("../../middleware/is-auth");
 
 const MIME_TYPE_MAP = {
   "image/png": "png",
@@ -31,10 +32,10 @@ router.get("/all-posts", postsController.getPosts);
 
 router.get("/get-post/:postId", postsController.getPost);
 
-router.post("/add-post",multer({storage:storage}).single("image"), postsController.createPost);
+router.post("/add-post",isAuth ,multer({storage:storage}).single("image"), postsController.createPost);
 
-router.delete("/delete-post/:postId", postsController.deletePost);
+router.delete("/delete-post/:postId",isAuth, postsController.deletePost);
 
-router.put("/update-post/:postId",multer({storage:storage}).single("image"), postsController.updatePost);
+router.put("/update-post/:postId",isAuth,multer({storage:storage}).single("image"), postsController.updatePost);
 
 module.exports = router;

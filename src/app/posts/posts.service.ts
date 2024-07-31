@@ -4,6 +4,8 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 
+import {environment} from "../../environments/environment";
+
 @Injectable({providedIn: 'root'})
 export class PostsService {
   private posts: Post[] = [];
@@ -18,7 +20,7 @@ export class PostsService {
   getPosts(pageSize: number, currentPage: number) {
     const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`;
     return this.http.get<{message: string, posts: any , maxPosts:number}>(
-      'http://localhost:3000/posts/all-posts/'+ queryParams
+      `${environment.apiUrl}/posts/all-posts/`+ queryParams
     ).pipe(map((postData)=> {
         return {posts:postData.posts.map(post => {
           return {
@@ -41,7 +43,7 @@ export class PostsService {
 
   getPost(id: string) {
     return this.http.get<{message: string, post: any}>(
-      'http://localhost:3000/posts/get-post/' + id
+      `${environment.apiUrl}/posts/get-post/` + id
     ).pipe(map((postData)=> {
         return {
           title: postData.post.title,
@@ -65,7 +67,7 @@ export class PostsService {
       post = {id: id, title: title, content: content, imagePath: image};
     }
     this.http.put<{message: string}>(
-      'http://localhost:3000/posts/update-post/' + id,
+      `${environment.apiUrl}/posts/update-post/` + id,
       post
     ).subscribe(
       (responseData) => {
@@ -93,7 +95,7 @@ export class PostsService {
     postData.append('image', image, title);
 
     this.http.post<{message: string , post :Post}>(
-      'http://localhost:3000/posts/add-post',
+      `${environment.apiUrl}/posts/add-post`,
       postData
     ).subscribe(
       (responseData) => {
@@ -112,6 +114,6 @@ export class PostsService {
 
   deletePost(postId: string) {
     return  this.http.delete<{message: string}>(
-      'http://localhost:3000/posts/delete-post/' + postId);
+      `${environment.apiUrl}/posts/delete-post/` + postId);
   }
 }

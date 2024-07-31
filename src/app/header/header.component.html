@@ -1,7 +1,24 @@
 <mat-toolbar>
-  <span>Posts app </span>
+  <span class="toolbar-title" routerLink="/posts" >Posts App</span>
   <div class="header-items">
     <span><a mat-button routerLink="/posts" routerLinkActive="mat-accent">All Posts</a></span>
-    <span><a mat-button routerLink="/create" routerLinkActive="mat-accent">New Post</a></span>
+    <span><a *ngIf="userIsAuthenticated" mat-button routerLink="/create" routerLinkActive="mat-accent">New Post</a></span>
+    <div class="user-menu">
+      <button mat-button [matMenuTriggerFor]="menu">User</button>
+      <mat-menu #menu="matMenu">
+        <div *ngIf="!userIsAuthenticated">
+          <button mat-menu-item routerLink="/auth/login" routerLinkActive="mat-accent">Login</button>
+          <button mat-menu-item routerLink="/auth/signup" routerLinkActive="mat-accent">Register</button>
+        </div>
+        <button
+          *ngIf="userIsAuthenticated"
+          mat-menu-item
+          (click)="onLogout()"
+          routerLinkActive="mat-accent">
+          Logout
+        </button>
+      </mat-menu>
+    </div>
   </div>
 </mat-toolbar>
+
