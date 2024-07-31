@@ -1,0 +1,48 @@
+/* Container for the error message */
+.error-container {
+  max-width: 600px; /* Limit the width of the container */
+  margin: 2rem auto; /* Center horizontally and add top/bottom margin */
+  padding: 2rem; /* Add padding inside the container */
+  border-radius: 8px; /* Rounded corners */
+  background: #fff; /* Light background for contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for better visibility */
+  text-align: center; /* Center-align text */
+  border: 1px solid #ff5722; /* Orange border */
+}
+
+/* Style for the heading */
+.error-container h1 {
+  color: #ff5722; /* Orange color */
+  font-size: 2rem; /* Larger font size for emphasis */
+  /*margin-bottom: 1rem; !* Space below the heading *!*/
+  margin: auto  ;
+}
+
+/* Style for the paragraph */
+.error-container p {
+  color: #333; /* Darker text color for readability */
+  font-size: 2rem; /* Standard font size */
+  margin: 0; /* Remove default margin */
+}
+
+/* Optional: Add a background color to the error message container */
+.error-container {
+  background-color: #fff3e0; /* Light orange background */
+  width: 900px;
+  height: 700px;
+  margin: 2rem auto;
+}
+button{
+  background-color: #ff5722;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  border: none;
+  margin-top: 1rem;
+}
+button:hover {
+  color: #ff5722; /* Highlight color on hover */
+  background-color: white;
+}
