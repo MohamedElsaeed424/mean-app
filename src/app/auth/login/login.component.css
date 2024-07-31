@@ -1,0 +1,55 @@
+/* Center the container and make it take up at least the full height of the viewport */
+.container {
+  min-height: 100vh; /* Full viewport height */
+  margin-top: 2cm; /* Remove margin-top */
+  padding-top: 0; /* Remove padding-top */
+  display: block;
+}
+
+/* Style the card to make it look better */
+.card {
+  border-radius: 8px;
+  border: none;
+  background: #fff; /* Light background for contrast */
+}
+
+/* Style the form labels */
+.form-label {
+  font-weight: bold;
+  color: #333; /* Darker text color for labels */
+}
+
+/* Style the input fields */
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ddd; /* Light border color */
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+}
+
+/* Style the invalid feedback */
+.invalid-feedback {
+  color: #dc3545; /* Red for error messages */
+}
+
+/* Style the submit button */
+.btn-primary {
+  background-color: #ff5722; /* Orange color */
+  border-color: #ff5722; /* Matching border color */
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #e64a19; /* Darker shade of orange */
+  border-color: #e64a19; /* Matching border color */
+}
+
+/* Optional: Add a border color for the focus state of inputs */
+.form-control:focus {
+  border-color: #ff5722; /* Orange color on focus */
+  box-shadow: 0 0 0 0.2rem rgba(255, 87, 34, 0.25); /* Light orange shadow */
+}
+
+mat-spinner{
+  margin: 0 auto;
+  display: block;
+}

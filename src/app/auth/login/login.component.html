@@ -1,0 +1,25 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="container d-flex justify-content-center align-items-center min-vh-100"*ngIf="!isLoading">
+  <div class="card shadow-lg p-4">
+    <h1 class="text-center mb-4 text-primary">Login</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email">
+        <div class="invalid-feedback">
+          <span *ngIf="loginForm.get('email').hasError('required')">Email is required</span>
+          <span *ngIf="loginForm.get('email').hasError('email')">Email is invalid</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter your password">
+        <div class="invalid-feedback">
+          <span *ngIf="loginForm.get('password').hasError('required')">Password is required</span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" *ngIf="!isLoading">Login</button>
+
+    </form>
+  </div>
+</div>
